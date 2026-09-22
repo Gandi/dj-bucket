@@ -1,0 +1,24 @@
+[project]
+name = "dj-bucket"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11,<4"
+dependencies = [
+    "django >=4.1,<6.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.15.18,<1",
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+extend-exclude = ["dj_bucket/migrations"]
