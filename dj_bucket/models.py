@@ -14,6 +14,8 @@ from .settings import BUCKET_PATH
 
 
 class BucketItem(models.Model):
+    app_label = "dj_bucket"
+
     raw = models.BinaryField()
     path = models.CharField(max_length=255, unique=True)
     mimetype = models.CharField(max_length=64)
@@ -22,7 +24,7 @@ class BucketItem(models.Model):
     modified_at = models.DateTimeField()
 
 
-@deconstructible(path="gcs.infrastructure.dj_bucket.models.Bucket")
+@deconstructible(path="dj_bucket.infrastructure.dj_bucket.models.Bucket")
 class Bucket(Storage):
     def _open(self, name: str, mode: str) -> StringIO | BytesIO:
         # Figure out if mode should be handled

@@ -1,4 +1,1 @@
-INSTALLED_APPS = [
-]
-
-BUCKET_PATH = "^bucket/"
+BUCKET_PATH = "bucket/"

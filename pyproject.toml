@@ -1,7 +1,7 @@
 [project]
 name = "dj-bucket"
 version = "0.1.0"
-description = "Add your description here"
+description = "Use your database as a S3 storage"
 readme = "README.md"
 requires-python = ">=3.11,<4"
 dependencies = [
@@ -10,9 +10,19 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "mypy>=2.3.1",
     "pytest>=9.1.1",
+    "pytest-cov>=7.1.0,<8",
+    "pytest-django>=4.14.0",
     "ruff>=0.15.18,<1",
 ]
+
+[[tool.uv.index]]
+name = "internal-proxy"
+url = "https://pyrror.corp.gandi.net/gandi/dev/+simple/"
+
+[tool.pyright]
+typeCheckingMode = "basic"
 
 [build-system]
 requires = ["pdm-backend"]
@@ -22,3 +32,22 @@ build-backend = "pdm.backend"
 line-length = 88
 target-version = "py312"
 extend-exclude = ["dj_bucket/migrations"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+
+[tool.mypy]
+ignore_missing_imports = true
+exclude = 'migrations/'
+
+[[tool.mypy.overrides]]
+module = "dj_bucket.*"
+disallow_any_generics = true
+disallow_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = [
+  "django.*",
+  "wagtail.*",
+]
+ignore_missing_imports = true
