@@ -33,9 +33,23 @@ release major_minor_patch:
 update:
     #!/bin/bash
     uv sync --all-groups
-    uv export --group dev --no-hashes > .gitlab/ci/requirements.txt
 
 [doc("Update the dependencies with latest compatible version")]
 upgrade: && update
     uv lock --upgrade
-    uv export --group dev --no-hashes > .gitlab/ci/requirements.txt
+
+release major_minor_patch: && changelog
+    uv version --bump {{major_minor_patch}}
+
+changelog:
+    uv run python scripts/write_changelog.py
+    cat CHANGELOG.md >> CHANGELOG.md.new
+    rm CHANGELOG.md
+    mv CHANGELOG.md.new CHANGELOG.md
+    $EDITOR CHANGELOG.md
+
+publish:
+    git commit -am "Release $(uv version --short --color=never)"
+    git push
+    git tag "v$(uv version --short --color=never)"
+    git push origin "v$(uv version --short --color=never)"
