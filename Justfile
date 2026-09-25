@@ -25,13 +25,8 @@ unittest test_suite=default_test_suite:
 [doc("run all code sanity check: linting typing and tests")]
 test: lint typecheck unittest
 
-[doc("bump a version of the package")]
-release major_minor_patch:
-    ./bin/tagging.sh {{major_minor_patch}}
-
 [doc("Sync the lock file from pyproject.tom declaration without upgrading all.")]
 update:
-    #!/bin/bash
     uv sync --all-groups
 
 [doc("Update the dependencies with latest compatible version")]
