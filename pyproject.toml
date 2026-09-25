@@ -1,6 +1,6 @@
 [project]
 name = "dj-bucket"
-version = "0.1.1"
+version = "0.1.2"
 authors = [{ name = "Benjamin Hirschfield", email = "me@bennybarry.com" }]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
