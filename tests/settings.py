@@ -30,3 +30,5 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+BUCKET_PATH = "bucket/"
