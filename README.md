@@ -25,5 +25,16 @@ DATABASES = {
 }
 ```
 
+Add the bucket URL to your `urls.py`:
+
+```python
+from dj_bucket.urls import urlpatterns as dj_bucket_urls
+
+urlpatterns = [
+    path("", include(dj_bucket_urls)),
+    ...
+]
+```
+
 Run the Django database migrations to create the table that will store the
 blobs.
