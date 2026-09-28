@@ -23,7 +23,7 @@ class BucketItem(models.Model):
     modified_at = models.DateTimeField()
 
 
-@deconstructible(path="dj_bucket.infrastructure.dj_bucket.models.Bucket")
+@deconstructible(path="dj_bucket.models.Bucket")
 class Bucket(Storage):
     def _open(self, name: str, mode: str) -> StringIO | BytesIO:
         # Figure out if mode should be handled
