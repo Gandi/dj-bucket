@@ -11,7 +11,8 @@ INSTALLED_APPS: = [
     "dj_bucket",
 ]
 
-BUCKET_PATH = "bucket/"
+# Bucket base path no starting and no ending slash
+BUCKET_PATH="bucket"
 ```
 
 Then make sure a database backend is setup, for testing you can use the SQLite:
@@ -38,3 +39,15 @@ urlpatterns = [
 
 Run the Django database migrations to create the table that will store the
 blobs.
+
+## Wagtail
+
+With wagtail you need to declare the storage in the `STORAGES` variable:
+
+```python
+STORAGES = {
+    "default": {
+        "BACKEND": "dj_bucket.models.Bucket",
+    }
+}
+```

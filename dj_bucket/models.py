@@ -3,14 +3,13 @@ from datetime import datetime
 from io import BytesIO, StringIO
 from urllib.parse import urljoin
 
+from django.conf import settings
 from django.core.files import File
 from django.core.files.storage import Storage
 from django.db import models
 from django.utils.deconstruct import deconstructible
 from django.utils.encoding import filepath_to_uri
 from django.utils.timezone import now
-
-from .settings import BUCKET_PATH
 
 
 class BucketItem(models.Model):
@@ -24,7 +23,7 @@ class BucketItem(models.Model):
     modified_at = models.DateTimeField()
 
 
-@deconstructible(path="dj_bucket.infrastructure.dj_bucket.models.Bucket")
+@deconstructible(path="dj_bucket.models.Bucket")
 class Bucket(Storage):
     def _open(self, name: str, mode: str) -> StringIO | BytesIO:
         # Figure out if mode should be handled
@@ -67,7 +66,8 @@ class Bucket(Storage):
 
     @property
     def base_url(self) -> str:
-        return f"/{BUCKET_PATH}"
+        base_path = settings.BUCKET_PATH.strip("/")
+        return f"/{base_path}/"
 
     def exists(self, name: str) -> bool:
         """
