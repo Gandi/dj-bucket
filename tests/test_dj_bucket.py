@@ -17,6 +17,13 @@ class DjBucketTestCase(TestCase):
             b"\x17Qp\x06\x00\x00\x00\x00IEND\xaeB`\x82"
         )
 
+    def test_upload_base_url(self):
+        from django.conf import settings
+        self.assertEqual("bucket", settings.BUCKET_PATH)
+
+        storage = Bucket()
+        self.assertEqual("/bucket/", storage.base_url)
+
     def test_upload_text(self):
         file_path = "file.txt"
         storage = Bucket()
