@@ -1,3 +1,6 @@
+## 0.1.4  - Released on 2026-09-30
+* Add missing sql migration 
+
 ## 0.1.3  - Released on 2026-09-28
 * Fixed bucket base url
 * Fixed bad parameter for the deconstructible decorator
